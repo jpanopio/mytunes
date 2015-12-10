@@ -27,7 +27,10 @@ var PlayerView = Backbone.View.extend({
     // this.el.trigger('songEnd', this);
     var song = this.model;
     console.log(this.model);
-    song.dequeue();
+    console.log("SongEnded");
+    song.ended();
+    this.trigger("ended", this);
+    // song.dequeue();
   }
 
 });

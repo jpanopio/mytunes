@@ -13,7 +13,7 @@ var AppView = Backbone.View.extend({
       this.playerView.setSong(model.get('currentSong'));
     }, this);
 
-    this.playerView.on("songEnd", function(){
+    this.playerView.on("ended", function(){
       console.log("PlayerView detected songEnd!");
     });
   },
