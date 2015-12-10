@@ -6,6 +6,9 @@ var SongQueue = Songs.extend({
     this.on("enqueue", this.enqueue, this);
   },
 
+  
+  playlistName: "Untitled List",
+
   enqueue: function(song){
     // var songClone = song.clone();
     // this.add(song.clone());
@@ -30,6 +33,10 @@ var SongQueue = Songs.extend({
   playFirst: function() {
     console.log("playFirst Called");
     this.models[0].play();
+  },
+
+  setPlaylistName: function(name){
+    this.playlistName = name;
   }
 
 });

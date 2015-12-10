@@ -16,14 +16,37 @@ var AppView = Backbone.View.extend({
     this.playerView.on("ended", function(){
       console.log("PlayerView detected songEnd!");
     });
+
+    this.newLists = [];
+
+
+    this.button =  '<button>ADD PLAYLIST</button><br>';
+    this.listInput = '<input type="text"></input>';
+    var self = this;
+
+    this.$el.on("click", 'button', function(){
+      var value = $('input').val();
+      self.model.createPlaylist(value);
+      self.newListView = new SongQueueView({collection: self.model.get(value)});
+      // console.log(self.newListView);
+      self.newLists.push(self.newListView.$el);
+      self.songQueueView.$el.remove();
+      self.songQueueView = self.newListView;
+      self.$el.append(self.songQueueView.$el);
+      self.model.set('songQueue', self.model.get(value));
+      // self.render();
+    });
   },
 
   render: function() {
     return this.$el.html([
+      this.listInput,
+      this.button,
       this.playerView.$el,
       this.libraryView.$el,
-      this.songQueueView.$el
+      this.songQueueView.$el,
     ]);
+    // .concat(this.newLists));
   }
 
 });
